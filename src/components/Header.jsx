@@ -13,6 +13,7 @@ function Header() {
 
   const pathParts = location.pathname.split("/");
   const setId = pathParts[2];
+
   const currentSet = getSetById(setId);
 
   const headerColor = currentSet
@@ -21,10 +22,12 @@ function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 isolate overflow-hidden text-white shadow-md"
-      style={{ backgroundColor: headerColor }}
+      className="fixed inset-x-0 top-0 z-[100] isolate h-[72px] overflow-hidden text-white shadow-md"
+      style={{
+        backgroundColor: headerColor,
+      }}
     >
-      {/* Mảnh ghép mờ phía sau Header */}
+      {/* Họa tiết nền */}
       <div
         className="pointer-events-none absolute inset-0 overflow-hidden"
         aria-hidden="true"
@@ -34,17 +37,17 @@ function Header() {
         <PuzzlePieceIcon className="absolute -bottom-14 left-[42%] h-28 w-28 rotate-12 text-white/5" />
       </div>
 
-      <div className="relative z-10 flex items-center justify-between p-4">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-screen-2xl items-center justify-between px-4 sm:px-6">
         <Link
           to="/"
-          className="group flex items-center gap-3 rounded-2xl p-1 transition-colors hover:bg-white/10"
+          className="group flex min-w-0 items-center gap-3 rounded-2xl p-1 transition-colors hover:bg-white/10"
           aria-label="Về trang chủ"
         >
-          <span className="animate-puzzle-breathe flex h-10 w-10 items-center justify-center rounded-2xl bg-white/15 shadow-inner ring-1 ring-white/20">
+          <span className="animate-puzzle-breathe flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/15 shadow-inner ring-1 ring-white/20">
             <PuzzlePieceIcon className="h-6 w-6 text-white" />
           </span>
 
-          <h1 className="text-base font-black uppercase tracking-tight sm:text-lg">
+          <h1 className="truncate whitespace-nowrap text-sm font-black uppercase tracking-tight sm:text-lg">
             Mảnh Ghép Chữ Hán
           </h1>
         </Link>
@@ -55,7 +58,7 @@ function Header() {
               ? `/set/${currentSet.setId}`
               : "/"
           }
-          className="rounded-full p-2 transition-colors hover:bg-white/20"
+          className="ml-3 shrink-0 rounded-full p-2 transition-colors hover:bg-white/20"
           aria-label={
             currentSet
               ? `Tiếp tục học ${currentSet.name}`
