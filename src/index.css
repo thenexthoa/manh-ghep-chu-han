@@ -1,0 +1,367 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/* =========================================================
+   THIẾT LẬP CHUNG
+   ========================================================= */
+
+:root {
+  font-family: "Quicksand", system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background-color: #fdfbf7;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  font-family: "Quicksand", system-ui, sans-serif;
+
+  background-color: #fdfbf7;
+  color: #1e293b;
+
+  user-select: none;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+
+/* =========================================================
+   HIỆU ỨNG GHÉP CHỮ
+   ========================================================= */
+
+@keyframes snapIn {
+  0% {
+    transform: scale(0.4) translateY(50px);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.15) translateY(-5px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-snap {
+  animation: snapIn 0.5s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+}
+
+
+/* =========================================================
+   HIỆU ỨNG DÒNG MASCOT
+   ========================================================= */
+
+@keyframes bounceSubtle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-bounce-subtle {
+  animation: bounceSubtle 2s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   HIỆU ỨNG XUẤT HIỆN
+   ========================================================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+
+/* =========================================================
+   HIỆU ỨNG LOADING
+   ========================================================= */
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+
+/* =========================================================
+   CATEGORY CARD
+   ========================================================= */
+
+.category-card {
+  background: rgba(255, 255, 255, 0.8);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+
+/* =========================================================
+   HIỆU ỨNG HƠI THỞ CHO SLOGAN FOOTER
+   ========================================================= */
+
+@keyframes breatheSoft {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: scale(1.025);
+    opacity: 1;
+  }
+}
+
+.animate-breathe-soft {
+  animation: breatheSoft 3.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+
+/* =========================================================
+   HIỆU ỨNG ICON MẢNH GHÉP TRÊN HEADER
+   ========================================================= */
+
+@keyframes puzzleBreathe {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: scale(1.08) rotate(2deg);
+    opacity: 1;
+  }
+}
+
+.animate-puzzle-breathe {
+  animation: puzzleBreathe 3.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+
+/* =========================================================
+   HIỆU ỨNG MẢNH GHÉP NỀN HEADER
+   ========================================================= */
+
+@keyframes puzzleDrift {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      rotate(-6deg);
+  }
+
+  50% {
+    transform:
+      translate3d(-8px, 5px, 0)
+      rotate(-2deg);
+  }
+}
+
+.animate-puzzle-drift {
+  animation: puzzleDrift 8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+
+/* =========================================================
+   HIỆU ỨNG SLOGAN TRANG CHỦ
+   ========================================================= */
+
+@keyframes sloganMagic {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.78;
+    background-position: 0% 50%;
+  }
+
+  50% {
+    transform: translateY(-2px);
+    opacity: 1;
+    background-position: 100% 50%;
+  }
+}
+
+.animate-slogan-magic {
+  color: transparent;
+
+  background-image: linear-gradient(
+    90deg,
+    #64748b 0%,
+    #334155 35%,
+    #dc2626 50%,
+    #334155 65%,
+    #64748b 100%
+  );
+
+  background-size: 220% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  animation: sloganMagic 4.8s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   HỖ TRỢ NGƯỜI DÙNG GIẢM CHUYỂN ĐỘNG
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-snap,
+  .animate-bounce-subtle,
+  .fade-in,
+  .spin,
+  .animate-breathe-soft,
+  .animate-puzzle-breathe,
+  .animate-puzzle-drift,
+  .animate-slogan-magic {
+    animation: none;
+  }
+
+  .animate-slogan-magic {
+    color: #64748b;
+    background: none;
+    opacity: 1;
+  }
+
+  .animate-breathe-soft {
+    opacity: 1;
+  }
+}
+@keyframes puzzleBreathe {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: scale(1.08) rotate(2deg);
+    opacity: 1;
+  }
+}
+
+.animate-puzzle-breathe {
+  animation: puzzleBreathe 3.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes puzzleDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-6deg);
+  }
+
+  50% {
+    transform: translate3d(-8px, 5px, 0) rotate(-2deg);
+  }
+}
+
+.animate-puzzle-drift {
+  animation: puzzleDrift 8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes sloganMagic {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.78;
+    background-position: 0% 50%;
+  }
+
+  50% {
+    transform: translateY(-2px);
+    opacity: 1;
+    background-position: 100% 50%;
+  }
+}
+
+.animate-slogan-magic {
+  color: transparent;
+  background-image: linear-gradient(
+    90deg,
+    #64748b 0%,
+    #334155 35%,
+    #dc2626 50%,
+    #334155 65%,
+    #64748b 100%
+  );
+  background-size: 220% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: sloganMagic 4.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-puzzle-breathe,
+  .animate-puzzle-drift,
+  .animate-slogan-magic {
+    animation: none;
+  }
+
+  .animate-slogan-magic {
+    color: #64748b;
+    background: none;
+    opacity: 1;
+  }
+}
