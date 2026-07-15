@@ -1,4 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+} from "react-router-dom";
 
 import { IconBook } from "./icons";
 import PuzzlePieceIcon from "./PuzzlePieceIcon";
@@ -11,14 +14,21 @@ import {
 function Header() {
   const location = useLocation();
 
-  const pathParts = location.pathname.split("/");
+  const pathParts =
+    location.pathname.split("/");
+
   const setId = pathParts[2];
 
-  const currentSet = getSetById(setId);
+  const currentSet =
+    getSetById(setId);
 
   const headerColor = currentSet
     ? getColor(currentSet.themeColor)
     : "#dc2626";
+
+  const isMethodPage =
+    location.pathname ===
+    "/phuong-phap";
 
   return (
     <header
@@ -27,7 +37,6 @@ function Header() {
         backgroundColor: headerColor,
       }}
     >
-      {/* Họa tiết nền */}
       <div
         className="pointer-events-none absolute inset-0 overflow-hidden"
         aria-hidden="true"
@@ -53,19 +62,19 @@ function Header() {
         </Link>
 
         <Link
-          to={
-            currentSet
-              ? `/set/${currentSet.setId}`
-              : "/"
-          }
-          className="ml-3 shrink-0 rounded-full p-2 transition-colors hover:bg-white/20"
-          aria-label={
-            currentSet
-              ? `Tiếp tục học ${currentSet.name}`
-              : "Về danh sách bài học"
-          }
+          to="/phuong-phap"
+          className={`ml-3 flex shrink-0 items-center gap-2 rounded-full px-3 py-2 transition-colors sm:rounded-2xl sm:px-4 ${
+            isMethodPage
+              ? "bg-white text-red-600 shadow-sm"
+              : "hover:bg-white/20"
+          }`}
+          aria-label="Xem phương pháp học"
         >
           <IconBook />
+
+          <span className="hidden text-xs font-black uppercase tracking-wider sm:inline">
+            Phương pháp học
+          </span>
         </Link>
       </div>
     </header>
