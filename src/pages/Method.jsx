@@ -435,8 +435,8 @@ function Method() {
               <p className="text-6xl">☕</p>
 
               <blockquote className="mt-5 text-2xl font-black leading-relaxed text-slate-700 sm:text-3xl">
-                “Sao chữ nào cũng giống
-                giống nhau quá cô?”
+                “Sao hai chữ nhìn giống
+                giống cô ơi?”
               </blockquote>
 
               <p className="mt-5 font-bold leading-7 text-amber-800">
