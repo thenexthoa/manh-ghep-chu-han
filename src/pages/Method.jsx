@@ -351,7 +351,7 @@ function Method() {
               </h1>
 
               <p className="mt-5 text-xl font-black text-slate-600 sm:text-2xl">
-                Hiểu trước · Nhớ sau ·
+                Hiểu trước · Nhớ sâu ·
                 Rồi mới luyện
               </p>
 
@@ -502,7 +502,7 @@ function Method() {
               </p>
 
               <h2 className="mt-3 text-3xl font-black text-slate-800 sm:text-4xl">
-                Hiểu trước · Nhớ sau ·
+                Hiểu trước · Nhớ sâu ·
                 Rồi mới luyện
               </h2>
             </div>
@@ -714,12 +714,12 @@ function Method() {
             <div className="mt-7 rounded-[30px] bg-red-600 px-7 py-5 text-center text-white shadow-xl">
               <p className="text-lg font-black">
                 Không chỉ hỏi: “Chữ
-                này thuộc bộ gì?”
+                này thuộc bộ thủ (hình) gì?”
               </p>
 
               <p className="mt-2 text-2xl font-black">
                 Mà còn hỏi: “Chữ này
-                thuộc gia đình nào?”
+                thuộc Bộ âm nào?”
               </p>
             </div>
           </div>
