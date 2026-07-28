@@ -4,6 +4,10 @@ import {
   Routes,
 } from "react-router-dom";
 
+import CategoryPreviewModal from "./components/CategoryPreviewModal";
+import UpdateFloatingButton from "./components/UpdateFloatingButton";
+import UpdateModal from "./components/UpdateModal";
+
 import AppLayout from "./layouts/AppLayout";
 
 import Home from "./pages/Home";
@@ -49,6 +53,12 @@ function App() {
           />
         </Route>
       </Routes>
+
+      <UpdateFloatingButton />
+
+      <UpdateModal />
+
+      <CategoryPreviewModal />
     </BrowserRouter>
   );
 }

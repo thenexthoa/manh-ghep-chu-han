@@ -16,7 +16,8 @@ function Footer() {
     <footer className="mt-12 border-t border-slate-200 bg-white/50">
       <div className="mx-auto max-w-4xl px-5 py-6 text-center">
         <p className="text-xs font-bold text-slate-500 sm:text-sm">
-          Sản phẩm thuộc bản quyền của The Next Hoa ©
+          Sản phẩm thuộc bản quyền của
+          The Next Hoa ©
         </p>
 
         <div className="my-3 flex items-center justify-center gap-3">
@@ -30,8 +31,9 @@ function Footer() {
         </div>
 
         <p className="animate-breathe-soft mx-auto max-w-2xl text-xs font-semibold italic leading-relaxed text-slate-500 sm:text-sm">
-          “Sáng tạo vì tình yêu chữ Hán và vì sự tiến bộ của
-          người Việt học tiếng Trung.”
+          “Sáng tạo vì tình yêu chữ
+          Hán và vì sự tiến bộ của người
+          Việt học tiếng Trung.”
         </p>
       </div>
     </footer>

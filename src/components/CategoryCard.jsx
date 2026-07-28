@@ -75,6 +75,7 @@ function ChevronIcon({ isOpen }) {
 function CategoryCard({
   category,
   sets,
+  isNew = false,
   isOpen,
   onToggle,
 }) {
@@ -104,153 +105,202 @@ function CategoryCard({
   const CategoryIcon = style.icon;
   const hasSets = sets.length > 0;
 
-  const contentId = `category-content-${category.categoryId}`;
+  const contentId =
+    `category-content-${category.categoryId}`;
 
   return (
-    <section
-      className={`overflow-hidden rounded-[30px] border bg-white/55 backdrop-blur-sm transition-all duration-300 ${
-        isOpen
-          ? "border-slate-200 shadow-lg"
-          : "border-slate-100 shadow-sm"
-      }`}
-    >
-      {/* THANH TIÊU ĐỀ THU GỌN */}
-      <button
-        type="button"
-        onClick={onToggle}
-        disabled={!hasSets}
-        aria-expanded={isOpen}
-        aria-controls={contentId}
-        className={`flex w-full items-center justify-between gap-3 p-4 text-left transition-all duration-300 sm:p-5 ${
-          hasSets
-            ? "cursor-pointer hover:bg-white/80 active:scale-[0.995]"
-            : "cursor-default"
-        }`}
-        style={{
-          backgroundColor: isOpen
-            ? style.badge
-            : "transparent",
-        }}
-      >
-        <div className="flex min-w-0 items-center gap-3">
-          <div
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl shadow-inner sm:h-14 sm:w-14"
-            style={{
-              backgroundColor:
-                style.pale,
-              color: style.accent,
-            }}
-          >
-            <CategoryIcon />
-          </div>
-
-          <div className="min-w-0">
-            <h3
-              className="truncate text-sm font-black uppercase tracking-tight sm:text-lg"
-              style={{
-                color: style.accent,
-              }}
-            >
-              {style.label}
-            </h3>
-
-            <p className="mt-0.5 truncate text-[10px] font-bold text-slate-400 sm:text-xs">
-              {style.subtitle}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-          <span
-            className="whitespace-nowrap rounded-full px-2.5 py-1 text-[8px] font-black uppercase tracking-wider sm:px-3 sm:text-[10px]"
-            style={{
-              backgroundColor:
-                style.badge,
-              color: style.accent,
-            }}
-          >
-            {hasSets
-              ? `${sets.length} bộ chữ`
-              : "Đang cập nhật"}
-          </span>
-
-          {hasSets && (
-            <span
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-sm transition-colors"
-              style={{
-                color: style.accent,
-              }}
-            >
-              <ChevronIcon
-                isOpen={isOpen}
-              />
+    <section className="relative pt-3">
+      {/* BADGE MỚI NẰM NGOÀI KHUNG NÊN KHÔNG BỊ CẮT */}
+      {isNew && (
+        <div className="pointer-events-none absolute right-5 top-0 z-20">
+          <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-red-500 to-pink-500 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-white shadow-xl">
+            <span aria-hidden="true">
+              ✨
             </span>
-          )}
-        </div>
-      </button>
 
-      {/* NỘI DUNG CHỈ HIỂN THỊ KHI MỞ */}
-      {isOpen && hasSets && (
-        <div
-          id={contentId}
-          className="animate-snap border-t border-slate-100 px-4 pb-5 pt-5 sm:px-5 sm:pb-6"
-        >
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {sets.map((set) => {
-              const color = getColor(
-                set.themeColor
-              );
-
-              const core =
-                set.core ||
-                set.characters?.find(
-                  (character) =>
-                    character.role ===
-                    "core"
-                );
-
-              return (
-                <Link
-                  key={set.setId}
-                  to={`/set/${set.setId}`}
-                  className="relative overflow-hidden rounded-[30px] border-b-8 border-black/10 p-5 text-white shadow-lg transition-all hover:-translate-y-1 hover:scale-[1.03] active:scale-95 sm:rounded-[35px] sm:p-6"
-                  style={{
-                    backgroundColor:
-                      color,
-                  }}
-                  aria-label={`Mở ${set.name}`}
-                >
-                  <div className="absolute -bottom-10 -right-8 h-28 w-28 rounded-full bg-white/10" />
-
-                  <div className="absolute -left-8 -top-10 h-24 w-24 rounded-full bg-black/5" />
-
-                  <div className="relative z-10 flex min-h-[145px] flex-col items-center justify-center space-y-2 text-center">
-                    <span className="text-[9px] font-bold uppercase tracking-widest opacity-80 sm:text-[10px]">
-                      {set.name}
-                    </span>
-
-                    <span
-                      className="text-6xl font-black leading-none drop-shadow-sm sm:text-7xl"
-                      style={{
-                        fontFamily:
-                          '"Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif',
-                      }}
-                    >
-                      {core?.hanzi ||
-                        "?"}
-                    </span>
-
-                    <span className="rounded-full bg-black/10 px-3 py-1 text-xs font-black">
-                      {core?.pinyin ||
-                        "Đang cập nhật"}
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+            Mới
+          </span>
         </div>
       )}
+
+      {/* KHUNG THẺ CHÍNH */}
+      <div
+        className={`overflow-hidden rounded-[30px] border bg-white/55 backdrop-blur-sm transition-all duration-300 ${
+          isOpen
+            ? "border-slate-200 shadow-lg"
+            : "border-slate-100 shadow-sm"
+        } ${
+          isNew
+            ? "ring-2 ring-red-100"
+            : ""
+        }`}
+      >
+        {/* THANH TIÊU ĐỀ THU GỌN */}
+        <button
+          type="button"
+          onClick={onToggle}
+          disabled={!hasSets}
+          aria-expanded={isOpen}
+          aria-controls={contentId}
+          className={`flex w-full items-center justify-between gap-3 p-4 text-left transition-all duration-300 sm:p-5 ${
+            hasSets
+              ? "cursor-pointer hover:bg-white/80 active:scale-[0.995]"
+              : "cursor-default"
+          }`}
+          style={{
+            backgroundColor: isOpen
+              ? style.badge
+              : "transparent",
+          }}
+        >
+          <div className="flex min-w-0 items-center gap-3">
+            <div
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl shadow-inner sm:h-14 sm:w-14"
+              style={{
+                backgroundColor:
+                  style.pale,
+                color: style.accent,
+              }}
+            >
+              <CategoryIcon />
+            </div>
+
+            <div className="min-w-0">
+              <div className="flex min-w-0 items-center gap-2">
+                <h3
+                  className="truncate text-sm font-black uppercase tracking-tight sm:text-lg"
+                  style={{
+                    color:
+                      style.accent,
+                  }}
+                >
+                  {style.label}
+                </h3>
+
+                {isNew && (
+                  <span
+                    className="hidden shrink-0 rounded-full px-2 py-0.5 text-[8px] font-black uppercase tracking-wider sm:inline-flex"
+                    style={{
+                      backgroundColor:
+                        `${style.accent}16`,
+                      color:
+                        style.accent,
+                    }}
+                  >
+                    Nội dung mới
+                  </span>
+                )}
+              </div>
+
+              <p className="mt-0.5 truncate text-[10px] font-bold text-slate-400 sm:text-xs">
+                {style.subtitle}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <span
+              className="whitespace-nowrap rounded-full px-2.5 py-1 text-[8px] font-black uppercase tracking-wider sm:px-3 sm:text-[10px]"
+              style={{
+                backgroundColor:
+                  style.badge,
+                color: style.accent,
+              }}
+            >
+              {hasSets
+                ? `${sets.length} bộ chữ`
+                : "Sắp ra mắt"}
+            </span>
+
+            {hasSets && (
+              <span
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-sm transition-colors"
+                style={{
+                  color:
+                    style.accent,
+                }}
+              >
+                <ChevronIcon
+                  isOpen={isOpen}
+                />
+              </span>
+            )}
+          </div>
+        </button>
+
+        {/* DANH SÁCH BỘ CHỮ KHI NHÓM ĐƯỢC MỞ */}
+        {isOpen && hasSets && (
+          <div
+            id={contentId}
+            className="animate-snap border-t border-slate-100 px-4 pb-5 pt-5 sm:px-5 sm:pb-6"
+          >
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+              {sets.map((set) => {
+                const color = getColor(
+                  set.themeColor
+                );
+
+                const core =
+                  set.core ||
+                  set.characters?.find(
+                    (character) =>
+                      character.role ===
+                      "core"
+                  );
+
+                return (
+                  <Link
+                    key={set.setId}
+                    to={`/set/${set.setId}`}
+                    className="relative overflow-hidden rounded-[30px] border-b-8 border-black/10 p-5 text-white shadow-lg transition-all hover:-translate-y-1 hover:scale-[1.03] active:scale-95 sm:rounded-[35px] sm:p-6"
+                    style={{
+                      backgroundColor:
+                        color,
+                    }}
+                    aria-label={`Mở ${set.name}`}
+                  >
+                    <div className="absolute -bottom-10 -right-8 h-28 w-28 rounded-full bg-white/10" />
+
+                    <div className="absolute -left-8 -top-10 h-24 w-24 rounded-full bg-black/5" />
+
+                    <div className="relative z-10 flex min-h-[145px] flex-col items-center justify-center space-y-2 text-center">
+                      <span className="text-[9px] font-bold uppercase tracking-widest opacity-80 sm:text-[10px]">
+                        {set.name}
+                      </span>
+
+                      <span
+                        className="text-6xl font-black leading-none drop-shadow-sm sm:text-7xl"
+                        style={{
+                          fontFamily:
+                            '"Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif',
+                        }}
+                      >
+                        {core?.hanzi ||
+                          "?"}
+                      </span>
+
+                      <span className="rounded-full bg-black/10 px-3 py-1 text-xs font-black">
+                        {core?.pinyin ||
+                          "Đang cập nhật"}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* NHÓM CHƯA CÓ DỮ LIỆU */}
+        {!hasSets && (
+          <div className="border-t border-slate-100 bg-slate-50/60 px-5 py-4 text-center">
+            <p className="text-xs font-bold text-slate-400">
+              🚧 Nội dung đang được hoàn
+              thiện và sẽ sớm ra mắt.
+            </p>
+          </div>
+        )}
+      </div>
     </section>
   );
 }
