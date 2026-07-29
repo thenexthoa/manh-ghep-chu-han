@@ -9,6 +9,7 @@ import {
 
 import {
   CURRENT_RELEASE,
+  RELEASE_HISTORY,
 } from "../data/changelog";
 
 const OPEN_UPDATE_EVENT =
@@ -41,6 +42,11 @@ function UpdateModal() {
     setIsOpen,
   ] = useState(false);
 
+  const [
+    displayMode,
+    setDisplayMode,
+  ] = useState("current");
+
   useEffect(() => {
     const lastSeenVersion =
       window.localStorage.getItem(
@@ -55,11 +61,13 @@ function UpdateModal() {
     ) {
       timerId =
         window.setTimeout(() => {
+          setDisplayMode("current");
           setIsOpen(true);
         }, 700);
     }
 
     function openUpdates() {
+      setDisplayMode("history");
       setIsOpen(true);
     }
 
@@ -160,6 +168,26 @@ function UpdateModal() {
     return null;
   }
 
+  const releasesToDisplay =
+    displayMode === "history"
+      ? RELEASE_HISTORY
+      : [CURRENT_RELEASE];
+
+  const modalLabel =
+    displayMode === "history"
+      ? "Lịch sử cập nhật"
+      : CURRENT_RELEASE.label;
+
+  const modalTitle =
+    displayMode === "history"
+      ? "Mảnh Ghép Chữ Hán có gì mới?"
+      : CURRENT_RELEASE.title;
+
+  const modalDescription =
+    displayMode === "history"
+      ? "Xem lại những nội dung và trải nghiệm học tập đã được bổ sung qua từng phiên bản."
+      : CURRENT_RELEASE.description;
+
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/55 p-3 backdrop-blur-sm sm:p-6"
@@ -201,101 +229,134 @@ function UpdateModal() {
 
           <div className="relative pr-10">
             <span className="inline-flex rounded-full bg-red-50 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-red-600">
-              {CURRENT_RELEASE.label}
+              {modalLabel}
             </span>
 
             <h2
               id="update-modal-title"
               className="mt-4 text-2xl font-black leading-tight text-slate-800 sm:text-3xl"
             >
-              {CURRENT_RELEASE.title}
+              {modalTitle}
             </h2>
 
             <p className="mt-3 max-w-2xl font-semibold leading-7 text-slate-500">
-              {
-                CURRENT_RELEASE.description
-              }
+              {modalDescription}
             </p>
           </div>
         </header>
 
-        <div className="space-y-4 p-5 sm:p-8">
-          {CURRENT_RELEASE.updates.map(
-            (update) => (
-              <article
-                key={update.id}
-                className="overflow-hidden rounded-[26px] border border-white shadow-lg"
-                style={{
-                  backgroundColor:
-                    update.background,
-                }}
+        <div className="space-y-8 p-5 sm:p-8">
+          {releasesToDisplay.map(
+            (release) => (
+              <section
+                key={release.version}
+                className="space-y-4"
               >
-                <div className="p-5 sm:p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] bg-white text-2xl shadow-sm">
-                      {update.icon}
-                    </div>
-
-                    <div className="min-w-0 flex-1">
-                      <p
-                        className="text-xs font-black uppercase tracking-[0.16em]"
-                        style={{
-                          color:
-                            update.accent,
-                        }}
-                      >
-                        {update.type}
+                {displayMode ===
+                  "history" && (
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-[0.16em] text-red-600">
+                        {release.label}
                       </p>
 
-                      <h3 className="mt-1 text-xl font-black text-slate-800 sm:text-2xl">
-                        {update.title}
+                      <h3 className="mt-1 text-lg font-black text-slate-800">
+                        {release.title}
                       </h3>
-
-                      <p className="mt-3 font-semibold leading-7 text-slate-600">
-                        {
-                          update.description
-                        }
-                      </p>
                     </div>
-                  </div>
 
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {update.highlights.map(
-                      (item) => (
-                        <span
-                          key={item}
-                          className="rounded-full bg-white/90 px-3 py-1.5 text-sm font-bold text-slate-600 shadow-sm"
-                        >
-                          {item}
-                        </span>
-                      )
-                    )}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      openUpdate(update)
-                    }
-                    className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full px-5 py-2.5 text-sm font-black text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
-                    style={{
-                      backgroundColor:
-                        update.accent,
-                    }}
-                  >
-                    {
-                      update.actionLabel
-                    }
-
-                    <span
-                      className="ml-2"
-                      aria-hidden="true"
-                    >
-                      →
+                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-black text-slate-500">
+                      v{release.version}
                     </span>
-                  </button>
-                </div>
-              </article>
+                  </div>
+                )}
+
+                {release.updates.map(
+                  (update) => (
+                    <article
+                      key={`${release.version}-${update.id}`}
+                      className="overflow-hidden rounded-[26px] border border-white shadow-lg"
+                      style={{
+                        backgroundColor:
+                          update.background,
+                      }}
+                    >
+                      <div className="p-5 sm:p-6">
+                        <div className="flex items-start gap-4">
+                          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] bg-white text-2xl shadow-sm">
+                            {update.icon}
+                          </div>
+
+                          <div className="min-w-0 flex-1">
+                            <p
+                              className="text-xs font-black uppercase tracking-[0.16em]"
+                              style={{
+                                color:
+                                  update.accent,
+                              }}
+                            >
+                              {update.type}
+                            </p>
+
+                            <h3 className="mt-1 text-xl font-black text-slate-800 sm:text-2xl">
+                              {update.title}
+                            </h3>
+
+                            <p className="mt-3 font-semibold leading-7 text-slate-600">
+                              {
+                                update.description
+                              }
+                            </p>
+                          </div>
+                        </div>
+
+                        {update.highlights?.length >
+                          0 && (
+                          <div className="mt-5 flex flex-wrap gap-2">
+                            {update.highlights.map(
+                              (item) => (
+                                <span
+                                  key={item}
+                                  className="rounded-full bg-white/90 px-3 py-1.5 text-sm font-bold text-slate-600 shadow-sm"
+                                >
+                                  {item}
+                                </span>
+                              )
+                            )}
+                          </div>
+                        )}
+
+                        {update.actionLabel && (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              openUpdate(
+                                update
+                              )
+                            }
+                            className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full px-5 py-2.5 text-sm font-black text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+                            style={{
+                              backgroundColor:
+                                update.accent,
+                            }}
+                          >
+                            {
+                              update.actionLabel
+                            }
+
+                            <span
+                              className="ml-2"
+                              aria-hidden="true"
+                            >
+                              →
+                            </span>
+                          </button>
+                        )}
+                      </div>
+                    </article>
+                  )
+                )}
+              </section>
             )
           )}
         </div>
@@ -310,8 +371,8 @@ function UpdateModal() {
           </button>
 
           <p className="mt-3 text-xs font-semibold text-slate-400">
-            Bạn có thể mở lại thông báo
-            bằng nút “Mới” ở góc màn
+            Bạn có thể mở lại toàn bộ lịch
+            sử bằng nút “Mới” ở góc màn
             hình.
           </p>
         </footer>
