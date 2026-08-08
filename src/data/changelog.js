@@ -2,33 +2,36 @@ export const RELEASE_STORAGE_KEY =
   "manh-ghep-chu-han:last-seen-release";
 
 /**
- * Bản cập nhật mới nhất.
- * Chỉ nội dung này được hiển thị trong popup tự động.
+ * BẢN PHÁT HÀNH MỚI NHẤT
+ *
+ * Chỉ bản này tự động xuất hiện khi người dùng
+ * chưa xem phiên bản hiện tại.
  */
 export const CURRENT_RELEASE = {
-  version: "1.1.1",
+  version: "1.1.2",
 
-  date: "29/07/2026",
+  date: "03/08/2026",
 
   storageKey: RELEASE_STORAGE_KEY,
 
-  label: "Cập nhật ngày 29/07/2026",
+  label: "Cập nhật ngày 03/08/2026",
 
-  title: "Thêm 3 gia đình chữ mới",
+  title: "Mở rộng Nhóm Trăm họ",
 
   description:
-    "Mảnh Ghép Chữ Hán vừa bổ sung ba nhóm chữ mang các họ Bao – Bình – Kiều.",
+    "Mảnh Ghép Chữ Hán vừa bổ sung các gia đình chữ Phú, Thân, Thông và Mộ trong Nhóm Trăm họ.",
 
   updates: [
     {
-      id: "bao-binh-kieu-families",
+      id: "expand-surnames-phu-than-thong-mo",
 
-      type: "Nội dung mới",
+      type: "Cập nhật nội dung",
 
-      title: "Ba gia đình chữ Bao – Bình – Kiều",
+      title:
+        "Thêm 4 gia đình chữ Phú – Thân – Thông – Mộ",
 
       description:
-        "Khám phá cách các chữ lõi 包, 平 và 乔 kết hợp với những thành phần gợi nghĩa để tạo thành các gia đình chữ mới.",
+        "Với những chữ họ không trực tiếp làm thanh bàng, bài học được dẫn về chữ lõi gợi âm để người học hiểu mối liên hệ cấu tạo thay vì ghi nhớ từng chữ riêng lẻ.",
 
       icon: "🏮",
 
@@ -37,17 +40,20 @@ export const CURRENT_RELEASE = {
       background: "#fff7ed",
 
       highlights: [
-        "Bộ âm Bao: 包、鲍、抱、跑、饱、泡",
-        "Bộ âm Bình: 平、评、苹、萍",
-        "Bộ âm Kiều: 乔、桥、轿、侨、娇、骄",
-        "Có nghĩa tiếng Việt và từ thường gặp",
+        "Phú: 富 → 畐",
+        "Bổ sung gia đình chữ Thân",
+        "Thông: 通 → 甬",
+        "Mộ: 慕 → 莫",
+        "Hiểu chữ lõi gợi âm trước khi mở rộng",
       ],
 
-      actionLabel: "Khám phá các họ mới",
+      actionLabel: "Khám phá Trăm họ",
 
       actionType: "category-preview",
 
       targetCategoryName: "Trăm họ",
+
+      targetCategoryId: "surnames",
 
       isNew: true,
     },
@@ -55,26 +61,81 @@ export const CURRENT_RELEASE = {
 };
 
 /**
- * Toàn bộ lịch sử cập nhật.
- * Chỉ dùng cho nút cập nhật ở góc phải.
- * Bản mới nhất đặt ở đầu mảng.
+ * TOÀN BỘ LỊCH SỬ CẬP NHẬT
+ *
+ * Bản mới nhất luôn đặt ở đầu mảng.
+ * Nút “Mới” ở góc màn hình sẽ hiển thị
+ * toàn bộ các phiên bản trong danh sách này.
  */
 export const RELEASE_HISTORY = [
   CURRENT_RELEASE,
 
   {
-    version: "2026.07",
+    version: "1.1.1",
+
+    date: "29/07/2026",
+
+    storageKey: RELEASE_STORAGE_KEY,
+
+    label: "Cập nhật ngày 29/07/2026",
+
+    title: "Thêm 3 gia đình chữ mới",
+
+    description:
+      "Mảnh Ghép Chữ Hán bổ sung ba gia đình chữ Bao – Bình – Kiều trong Nhóm Trăm họ.",
+
+    updates: [
+      {
+        id: "bao-binh-kieu-families",
+
+        type: "Cập nhật nội dung",
+
+        title:
+          "Ba gia đình chữ Bao – Bình – Kiều",
+
+        description:
+          "Khám phá cách các chữ lõi 包, 平 và 乔 kết hợp với những thành phần gợi nghĩa để tạo thành các gia đình chữ mới.",
+
+        icon: "🏮",
+
+        accent: "#b91c1c",
+
+        background: "#fff7ed",
+
+        highlights: [
+          "Bộ âm Bao: 包、鲍、抱、跑、饱、泡",
+          "Bộ âm Bình: 平、评、苹、萍",
+          "Bộ âm Kiều: 乔、桥、轿、侨、娇、骄",
+          "Có nghĩa tiếng Việt và từ thường gặp",
+        ],
+
+        actionLabel: "Khám phá Trăm họ",
+
+        actionType: "category-preview",
+
+        targetCategoryName: "Trăm họ",
+
+        targetCategoryId: "surnames",
+
+        isNew: false,
+      },
+    ],
+  },
+
+  {
+    version: "1.1.0",
 
     date: "07/2026",
 
     storageKey: RELEASE_STORAGE_KEY,
 
-    label: "Cập nhật tháng 7",
+    label: "Cập nhật tháng 7/2026",
 
-    title: "Mảnh Ghép Chữ Hán có gì mới?",
+    title:
+      "Phương hướng & Không gian và Phương pháp học",
 
     description:
-      "Khám phá những nội dung và trải nghiệm học tập đã được bổ sung.",
+      "Bổ sung nhóm nội dung mới và trang giới thiệu phương pháp học của Mảnh Ghép Chữ Hán.",
 
     updates: [
       {
@@ -100,11 +161,12 @@ export const RELEASE_HISTORY = [
           "Học theo mảnh ghép",
         ],
 
-        actionLabel: "Khám phá nhóm mới",
+        actionLabel: "Khám phá nhóm",
 
         actionType: "category-preview",
 
-        targetCategoryName: "Phương hướng & Không gian",
+        targetCategoryName:
+          "Phương hướng & Không gian",
 
         isNew: false,
       },
@@ -114,7 +176,8 @@ export const RELEASE_HISTORY = [
 
         type: "Trải nghiệm học",
 
-        title: "Phương pháp học rõ ràng hơn",
+        title:
+          "Phương pháp học rõ ràng hơn",
 
         description:
           "Tìm hiểu cách học chữ Hán theo tiến trình Hiểu trước – nhớ sâu – rồi mới luyện.",
