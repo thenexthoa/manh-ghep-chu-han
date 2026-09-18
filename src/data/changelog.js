@@ -8,52 +8,51 @@ export const RELEASE_STORAGE_KEY =
  * chưa xem phiên bản hiện tại.
  */
 export const CURRENT_RELEASE = {
-  version: "1.1.2",
+  version: "1.1.3",
 
-  date: "03/08/2026",
+  date: "18/09/2026",
 
   storageKey: RELEASE_STORAGE_KEY,
 
-  label: "Cập nhật ngày 03/08/2026",
+  label: "Cập nhật ngày 18/09/2026",
 
-  title: "Mở rộng Nhóm Trăm họ",
+  title: "Nhóm mới:Nhóm Thiên nhiên",
 
   description:
-    "Mảnh Ghép Chữ Hán vừa bổ sung các gia đình chữ Phú, Thân, Thông và Mộ trong Nhóm Trăm họ.",
+    "Mảnh Ghép Chữ Hán vừa bổ sung Nhóm Thiên nhiên với 9 bộ chữ: Bồ, Bồng, Cốc, Giang, Hà, Lâm, Miêu, Nông và Quế.",
 
   updates: [
     {
-      id: "expand-surnames-phu-than-thong-mo",
+      id: "expand-nature-families",
 
       type: "Cập nhật nội dung",
 
-      title:
-        "Thêm 4 gia đình chữ Phú – Thân – Thông – Mộ",
+      title: "Nhóm mới:Nhóm Thiên nhiên (9 bộ chữ)",
 
       description:
-        "Với những chữ họ không trực tiếp làm thanh bàng, bài học được dẫn về chữ lõi gợi âm để người học hiểu mối liên hệ cấu tạo thay vì ghi nhớ từng chữ riêng lẻ.",
+        "Từ những chữ quen thuộc trong thiên nhiên, người học khám phá tiếp các chữ có liên hệ về cấu tạo và âm đọc. Với những chữ không trực tiếp làm thanh bàng, bài học dẫn về chữ lõi gợi âm.",
 
-      icon: "🏮",
+      icon: "🌿",
 
-      accent: "#b91c1c",
+      accent: "#15803d",
 
-      background: "#fff7ed",
+      background: "#f0fdf4",
 
       highlights: [
-        "Phú: 富 → 畐",
-        "Bổ sung gia đình chữ Thân",
-        "Thông: 通 → 甬",
-        "Mộ: 慕 → 莫",
-        "Hiểu chữ lõi gợi âm trước khi mở rộng",
+        "Bồ · Bồng · Cốc · Giang · Hà",
+        "Lâm · Miêu · Nông · Quế",
+        "蒲 → 浦 · 蓬 → 逢",
+        "江 → 工 · 河 → 可 · 桂 → 圭",
+        "Từ chữ thiên nhiên tìm về chữ lõi gợi âm",
       ],
 
-      actionLabel: "Khám phá Trăm họ",
+      actionLabel: "Khám phá Thiên nhiên",
 
       actionType: "category-preview",
 
-      targetCategoryName: "Trăm họ",
+      targetCategoryName: "Thiên nhiên",
 
-      targetCategoryId: "surnames",
+      targetCategoryId: "nature",
 
       isNew: true,
     },
@@ -69,6 +68,59 @@ export const CURRENT_RELEASE = {
  */
 export const RELEASE_HISTORY = [
   CURRENT_RELEASE,
+
+  {
+    version: "1.1.2",
+
+    date: "03/08/2026",
+
+    storageKey: RELEASE_STORAGE_KEY,
+
+    label: "Cập nhật ngày 03/08/2026",
+
+    title: "Mở rộng Nhóm Trăm họ",
+
+    description:
+      "Mảnh Ghép Chữ Hán vừa bổ sung các gia đình chữ Phú, Thân, Thông và Mộ trong Nhóm Trăm họ.",
+
+    updates: [
+      {
+        id: "expand-surnames-phu-than-thong-mo",
+
+        type: "Cập nhật nội dung",
+
+        title:
+          "Thêm 4 gia đình chữ Phú – Thân – Thông – Mộ",
+
+        description:
+          "Với những chữ họ không trực tiếp làm thanh bàng, bài học được dẫn về chữ lõi gợi âm để người học hiểu mối liên hệ cấu tạo thay vì ghi nhớ từng chữ riêng lẻ.",
+
+        icon: "🏮",
+
+        accent: "#b91c1c",
+
+        background: "#fff7ed",
+
+        highlights: [
+          "Phú: 富 → 畐",
+          "Bổ sung gia đình chữ Thân",
+          "Thông: 通 → 甬",
+          "Mộ: 慕 → 莫",
+          "Hiểu chữ lõi gợi âm trước khi mở rộng",
+        ],
+
+        actionLabel: "Khám phá Trăm họ",
+
+        actionType: "category-preview",
+
+        targetCategoryName: "Trăm họ",
+
+        targetCategoryId: "surnames",
+
+        isNew: false,
+      },
+    ],
+  },
 
   {
     version: "1.1.1",
